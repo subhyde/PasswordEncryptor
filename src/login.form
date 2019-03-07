@@ -40,7 +40,8 @@
         </constraints>
         <properties>
           <editable value="false"/>
-          <text value="PLEASE ENTER A PASSWORD (NO SPACES)"/>
+          <font size="14"/>
+          <text value="PLEASE ENTER A PASSWORD  &#10;( NO SPACES )"/>
         </properties>
       </component>
       <component id="7882b" class="javax.swing.JButton" binding="submit">
@@ -69,7 +70,8 @@
         </constraints>
         <properties>
           <editable value="false"/>
-          <text value="PLEASE ENTER A USERNAME ( NO SPACES | MUST BE BETWEEN 7-15 CHARACTERS)"/>
+          <font size="14"/>
+          <text value="PLEASE ENTER A USERNAME &#10;( NO SPACES | MUST BE BETWEEN 7-15 CHARACTERS )"/>
         </properties>
       </component>
       <component id="a35c4" class="javax.swing.JButton" binding="encrypt">
