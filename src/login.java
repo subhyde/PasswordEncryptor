@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.util.Scanner;
 import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.io.IOException;
@@ -22,10 +21,9 @@ public class login extends JFrame  {
     public login() {
         //creating the file
         File newTextFile = new File("Database");
-        //creates the scanner to find a match
-        Scanner scanner=new Scanner("Database");
         //setting the size of the window
         add(panel1);
+        //version number
         setTitle("Password Encrypter 0.0.1");
         setSize(400, 500);
 
@@ -33,17 +31,17 @@ public class login extends JFrame  {
         encrypt.setVisible(false);
         decrypt.setVisible(false);
 
-
+//action listener for the signup button
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//after signup is successful their username and info will be stored in the database in plain text
+                //if one of the fields is blank an error will appear
                 if (username.getText().equals("") || password.getText().equals("")) {
                     JOptionPane.showMessageDialog(null,
                             "You have left one of the fields blank",
                             "error",
                             JOptionPane.WARNING_MESSAGE);
-
+                    //error if username or password contains a space
                 } else if (username.getText().contains(" ") || password.getText().contains(" ")) {
 
                     JOptionPane.showMessageDialog(null,
@@ -51,8 +49,7 @@ public class login extends JFrame  {
                             "error",
                             JOptionPane.WARNING_MESSAGE);
                 }
-
-
+                //error if username is too long/short
                 else if(username.getText().length() >15 || username.getText().length() <7){
                     JOptionPane.showMessageDialog(null,
                             "Make sure your username is in between 7 and 15 characters",
@@ -61,18 +58,18 @@ public class login extends JFrame  {
 
                 }
                 else {
-
+//after signup is successful their username and info will be stored in the database in plain text
                     try {
-
+                        //this appends the text to the textfile
+                        //will change possibly to create unique ids to find combination easier
                         FileWriter fw = new FileWriter(newTextFile, true);
                         fw.write("username: " + username.getText() + " || " + "Password: " + password.getText() + "\n");
                         fw.close();
 
                     } catch (IOException iox) {
-                        //do stuff with exception
                         iox.printStackTrace();
                     }
-
+                    //message prompt saying data has successfully been stored
                     JOptionPane.showMessageDialog(null,
                             "\tYour Data Has Been Stored",
                             "Success",
@@ -87,20 +84,21 @@ public class login extends JFrame  {
         logIn.addActionListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e){
-
-try{
+            //below writes the entire data of the textfile to a string
+            try{
                 String content = new String(Files.readAllBytes(Paths.get("Database")), "UTF-8");
 
+                //checks the content of the string to see if the combination is there
 
                 if (content.contains(password.getText()) && content.contains(username.getText())) {
-                    encrypt.setVisible(true);
+                    encrypt.setVisible(true); //shows the encrypt and decrypt buttons
                     decrypt.setVisible(true);
-                    JOptionPane.showMessageDialog(null,
+                    JOptionPane.showMessageDialog(null, //displays success message with encryption access
                             "Welcome " + username.getText() + " you have encryption access now",
                             "login success",
                             JOptionPane.PLAIN_MESSAGE);
                 }
-
+                        //if the combination isnt present in the file, an error will occour
                          else {
                     JOptionPane.showMessageDialog(null,
                             "Invalid combination",
