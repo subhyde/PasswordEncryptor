@@ -10,7 +10,4 @@ This is a basic program that does the following:
 
 3) The user can click a button to view the encrypted data
 
-4) if the user closes the application with the data being decrypted, the data will auto decrypt on the next open,
-that way the information can be read to log in
-
 This program is just to test my basic java skills.
